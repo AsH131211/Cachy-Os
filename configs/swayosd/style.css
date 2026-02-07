@@ -1,0 +1,42 @@
+window {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+#container {
+    /* The Glass Tube base */
+    background-color: rgba(255, 255, 255, 0.08);
+    /* Reflective glass edges */
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 14px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0);
+}
+
+progress {
+    /* The hollow part of the tube */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 999px;
+    min-width: 6px; /* Narrower like a capillary tube */
+    min-height: 120px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+progressbar {
+    /* Mercury Metallic Liquid Gradient */
+    background: linear-gradient(to bottom, #ffffff, #9ca3af, #4b5563);
+    border-radius: 999px;
+    /* The 'Liquid' Shine */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+image, label {
+    /* Polished Chrome look for icons */
+    color: #e5e7eb;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,143 @@
+{
+    "layer": "top",
+    "position": "top",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+
+    "modules-left": [
+        "niri/workspaces",
+        "niri/window"
+    ],
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+        "group/tray-expander",
+        "battery",
+        "custom/notification",
+        "custom/exit"
+    ],
+
+    "group/tray-expander": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 600,
+            "children-class": "tray-group-item"
+        },
+        "modules": [
+            "custom/expand-icon",
+            "custom/gpu-info",
+            "network",
+            "bluetooth",
+            "pulseaudio",
+            "memory",
+            "cpu",
+            "tray"
+        ]
+    },
+
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "󰮯",
+            "default": "󰊠"
+        }
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "{:%b %d %a      %H:%M:%S}",
+        "locale": "en_US.UTF-8",
+        "tooltip": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "on-click": "alacritty -e sh -c 'cal -y; read -n 1'"
+    },
+
+    "custom/gpu-info": {
+        "interval": 2,
+        "return-type": "json",
+        "exec": "nvidia-smi --query-gpu=temperature.gpu,power.draw,memory.used,memory.total --format=csv,noheader,nounits | awk -F', ' '{printf \"{\\\"text\\\": \\\"%s°C   %sW   %d%%\\\", \\\"tooltip\\\": \\\"VRAM Used: %sMB / %sMB\\\"}\\n\", $1, $2, ($3/$4)*100, $3, $4}'",
+        "format": "<big><big>󱐋</big></big> {}",
+        "on-click": "alacritty -e sh -c 'nvitop; echo; read -n 1 -s -r -p \"Press any key to close...\"'"
+    },
+    
+
+    "memory": {
+        "interval": 5,
+        "format": "󰍛 {}%",
+        "tooltip": true,
+        "on-click": "alacritty -e btop"
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": "󰻠 {usage}%",
+        "tooltip": true,
+        "on-click": "alacritty -e btop"
+    },
+
+    "network": {
+        "format-wifi": "󰖩 {bandwidthDownBits}",
+        "format-ethernet": "󰈀 {bandwidthDownBits}",
+        "format-disconnected": "󰖪",
+        "on-click": "alacritty -e nmtui",
+        "tooltip": true
+    },
+
+    "custom/expand-icon": {
+        "format": "󰅀", 
+        "tooltip": false
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "custom/exit": {
+        "format": "󰐥",
+        "on-click": "wlogout"
+    },
+
+    "custom/notification": {
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂚",
+            "dnd-notification": "󱅫",
+            "dnd-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "escape": true
+    },
+
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "on-click": "alacritty -e bluetuith",
+        "tooltip-format": "{status}"
+    }
+}
