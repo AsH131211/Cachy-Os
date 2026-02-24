@@ -2,7 +2,7 @@
     "layer": "top",
     "position": "top",
     "exclusive": true,
-    "passthrough": false,
+    "passthrough": false, 
     "gtk-layer-shell": true,
 
     "modules-left": [
@@ -88,7 +88,7 @@
     },
 
     "custom/expand-icon": {
-        "format": "󰅀", 
+        "format": "<span size='x-large' weight='bold'>⚔</span>", 
         "tooltip": false
     },
 
@@ -107,7 +107,7 @@
     },
 
     "custom/exit": {
-        "format": "󰐥",
+        "format": "<span size='x-large' weight='bold'>⏻</span>",
         "on-click": "wlogout"
     },
 
